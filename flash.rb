@@ -5,8 +5,8 @@ class Game
     @deck = deck
   end
   
-  def guess?(term)
-    term == deck.first.term
+  def guess?(card, guess)
+    guess == card.term
   end
 
 end
@@ -23,14 +23,16 @@ end
 
 
 card1 = Card.new({:term=> "alias", :definition => "To create a second name for the variable or method."})
-card2 = Card.new({:term=> "dbc", :definition => "school"})
+card2 = Card.new({:term=> "dbc", :definition => "what is the abbreviation for dev bootcamp?"})
+card3 = Card.new({:term=> "hello", :definition => "what do you say when you see someone?"})
 
 
-input = gets.chomp
+# input = gets.chomp
 # puts 
 deck = [card1, card2]
-game = Game.new(deck)
+# game = Game.new(deck)
 
-puts game.guess?(input)
+# puts game.guess?(input)
 
-
+game = Interface.new(deck)
+puts game
