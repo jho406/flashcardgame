@@ -1,4 +1,5 @@
 require_relative 'ui'
+require 'csv'
 class Game
   attr_reader :deck
   def initialize(deck)
@@ -11,6 +12,17 @@ class Game
 
 end
 
+module Deck
+  def self.load
+    cards = []
+    File.read("deck.txt").split("\n").each_slice(3) do |lines|
+      card = lines.select{|word|word != ""}
+      cards << {:term=>card.last, :definition=> card.first}
+    end
+    cards.map{|card| Card.new(card)}
+  end
+end
+
 class Card
   attr_reader :term, :definition
   
@@ -21,18 +33,5 @@ class Card
 
 end
 
-
-card1 = Card.new({:term=> "alias", :definition => "To create a second name for the variable or method."})
-card2 = Card.new({:term=> "dbc", :definition => "what is the abbreviation for dev bootcamp?"})
-card3 = Card.new({:term=> "hello", :definition => "what do you say when you see someone?"})
-
-
-# input = gets.chomp
-# puts 
-deck = [card1, card2]
-# game = Game.new(deck)
-
-# puts game.guess?(input)
-
-game = Interface.new(deck)
+game = Interface.new
 puts game
