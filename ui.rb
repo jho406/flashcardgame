@@ -2,8 +2,8 @@
 class Interface
   attr_accessor 
 
-  def initialize
-    @game = Game.new(Deck.load) ## FEED IT THE 'DECK'
+  def initialize(file)
+    @game = Game.new(Deck.load(file)) ## FEED IT THE 'DECK'
     greeting 
     play!(@game.deck)
   end

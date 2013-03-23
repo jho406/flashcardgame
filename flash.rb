@@ -13,9 +13,9 @@ class Game
 end
 
 module Deck
-  def self.load
+  def self.load(file)
     cards = []
-    File.read("deck.txt").split("\n").each_slice(3) do |lines|
+    File.read(file).split("\n").each_slice(3) do |lines|
       card = lines.select{|word|word != ""}
       cards << {:term=>card.last, :definition=> card.first}
     end
@@ -33,5 +33,7 @@ class Card
 
 end
 
-game = Interface.new
+puts "Enter the name of a file that you would like to load as a deck!"
+file = gets.chomp
+game = Interface.new(file)
 puts game
