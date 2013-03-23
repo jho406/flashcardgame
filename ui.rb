@@ -2,10 +2,10 @@
 class Interface
   attr_accessor 
 
-  def initialize(deck)
-    @game = Game.new(deck) ## FEED IT THE 'DECK'
+  def initialize
+    @game = Game.new(Deck.load) ## FEED IT THE 'DECK'
     greeting 
-    play!(deck)
+    play!(@game.deck)
   end
 
   def greeting
@@ -13,17 +13,13 @@ class Interface
   end
 
   def play!(deck)
-    deck.each do |card|
+    @game.deck.each do |card|
       display_card(card)
-      if @game.guess?(card, get_input)
-        p "correct"
-        next
-      end
-      if
-        p "wrong"
+      until @game.guess?(card, get_input)
         @game.guess?(card, get_input)
       end
-    end    # continue through loop
+    end 
+    "Great job, you're done with the deck!"
   end
 
   def get_input
