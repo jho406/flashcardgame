@@ -1,5 +1,4 @@
 
-
 class Interface
   MESSAGES = {
     :greeting => "Hello! Let's play with some flashcards to learn Ruby, shall we?",

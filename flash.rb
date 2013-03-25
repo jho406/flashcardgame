@@ -36,7 +36,7 @@ end
 
 puts "Enter the name of a file that you would like to load as a deck!"
 file = gets.chomp
-game = Game.new(Deck.load(file, Card))
-iterface = Interface.new(game)
+flashcard_game = Game.new(Deck.load(file, Card))
+iterface = Interface.new(flashcard_game)
 puts interface.play!
 #puts game
