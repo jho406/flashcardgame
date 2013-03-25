@@ -1,5 +1,6 @@
 require_relative 'ui'
 require 'csv'
+
 class Game
   attr_reader :deck
   def initialize(deck)
@@ -13,13 +14,13 @@ class Game
 end
 
 module Deck
-  def self.load(file)
+  def self.load(file, card_class)
     cards = []
     File.read(file).split("\n").each_slice(3) do |lines|
       card = lines.select{|word|word != ""}
       cards << {:term=>card.last, :definition=> card.first}
     end
-    cards.map{|card| Card.new(card)}
+    cards.map{|card| card_class.new(card)}
   end
 end
 
@@ -30,10 +31,12 @@ class Card
     @term = hash[:term]
     @definition = hash[:definition] 
   end
-
 end
+
 
 puts "Enter the name of a file that you would like to load as a deck!"
 file = gets.chomp
-game = Interface.new(file)
-puts game
+game = Game.new(Deck.load(file, Card))
+iterface = Interface.new(game)
+puts interface.play!
+#puts game

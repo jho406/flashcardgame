@@ -1,25 +1,28 @@
-#stuff
-class Interface
-  attr_accessor 
 
-  def initialize(file)
-    @game = Game.new(Deck.load(file)) ## FEED IT THE 'DECK'
+
+class Interface
+  MESSAGES = {
+    :greeting => "Hello! Let's play with some flashcards to learn Ruby, shall we?",
+    :finish => "Great job, you're done with the deck!"
+  }
+  def initialize(game)
+    @game = game
     greeting 
-    play!(@game.deck)
+    #play!(@game.deck)
   end
 
   def greeting
-    "Hello! Let's play with some flashcards to learn Ruby, shall we?"
+    MESSAGES[:greeting]
   end
 
-  def play!(deck)
+  def play!
     @game.deck.each do |card|
       display_card(card)
       until @game.guess?(card, get_input)
         @game.guess?(card, get_input)
       end
     end 
-    "Great job, you're done with the deck!"
+    puts MESSAGES[:finish]
   end
 
   def get_input
